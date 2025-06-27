@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shop_id')->contrained();
+            $table->foreignId('shop_id')->constrained();
             $table->foreignId('item_id')->constrained();
             $table->double('qty',8,3);
             $table->double('total',10,2)->default(0);
