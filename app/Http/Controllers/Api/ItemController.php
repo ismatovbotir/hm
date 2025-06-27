@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Item;
 
 class ItemController extends Controller
 {
@@ -28,7 +29,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        return 'Ok';
+        $data=$request->data;
+        Item::upsert(
+            $data,
+            ['id'],
+            ['name','shortName','mark','category_id','partner_id','status']
+
+        );
+        return response()->json(['status' => 'done']);
+    
     }
 
     /**

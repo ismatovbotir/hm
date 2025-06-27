@@ -28,5 +28,6 @@ Route::resource('shop',ShopController::class);
 Route::resource('price',PriceController::class);
 Route::resource('partner',PartnerController::class);
 Route::resource('category',CategoryController::class);
+Route::resource('item',ItemController::class);
 
 
