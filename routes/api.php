@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\PriceController;
 use App\Http\Controllers\Api\PartnerController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,6 @@ Route::resource('price',PriceController::class);
 Route::resource('partner',PartnerController::class);
 Route::resource('category',CategoryController::class);
 Route::resource('item',ItemController::class);
+Route::resource('stock',StockController::class);
 
 

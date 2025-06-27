@@ -34,7 +34,6 @@ class PriceController extends Controller
             $data,
             ['id'],
             ['name']
-
         );
         return response()->json(['status' => 'done']);
     }
