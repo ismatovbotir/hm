@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sell;
 use Illuminate\Http\Request;
 
 class SellController extends Controller
@@ -28,7 +29,14 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->data;
+        Sell::upsert(
+            $data,
+            ['item_id','shop_id','sell_date'],
+            ['qty','total','cost','discount']
+
+        );
+        return response()->json(['status' => 'done']);
     }
 
     /**

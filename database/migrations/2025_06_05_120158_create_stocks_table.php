@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('shop_id')->constrained();
             $table->foreignId('item_id')->constrained();
-            $table->double('qty',8,3);
-            $table->double('total',10,2)->default(0);
+            $table->double('qty',12,3);
+            $table->double('total',12,2)->default(0);
             $table->date('stock_date');
             $table->unique(['shop_id', 'item_id', 'stock_date']);
             //$table->timestamps();

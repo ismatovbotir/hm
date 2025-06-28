@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId("shop_id")->constrained();
             $table->foreignId("item_id")->constrained();
-            $table->double("qty",8,3);
-            $table->double("cost",10,2)->nullable();
-            $table->double("total",10,2)->nullable();
-            $table->double("discount",10,2)->nullable();
+            $table->double("qty",12,3);
+            $table->double("cost",12,2)->nullable();
+            $table->double("total",12,2)->nullable();
+            $table->double("discount",12,2)->nullable();
             $table->date("sell_date");
             $table->unique(['shop_id', 'item_id', 'sell_date']);
             //$table->timestamps();
