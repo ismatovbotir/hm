@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\PartnerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/stock',[StockController::class,'index']);
+Route::resource('/item',ItemController::class);
+Route::resource('/partner',PartnerController::class);

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Stock;
+use App\Models\Item;
 
-class StockController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $stock=Stock::where('stock_date','2024-05-01')->with('item')->with('shop')->paginate(20);
-        dd($stock);
+        $items=Item::with('category')->with('partner')->paginate(20);
+        dd($items);
     }
 
     /**
@@ -30,14 +30,7 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->data;
-        Stock::upsert(
-            $data,
-            ['item_id','shop_id','stock_date'],
-            ['qty','total']
-
-        );
-        return response()->json(['status' => 'done']);
+        //
     }
 
     /**
