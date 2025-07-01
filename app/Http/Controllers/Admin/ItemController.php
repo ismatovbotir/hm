@@ -13,8 +13,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items=Item::with('category')->with('partner')->paginate(20);
-        dd($items);
+       $items=Item::with('category')->with('partner')->paginate(20);
+       dd($items);
     }
 
     /**

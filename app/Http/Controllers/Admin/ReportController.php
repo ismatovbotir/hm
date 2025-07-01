@@ -5,36 +5,65 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Shop;
 
 class ReportController extends Controller
 {
-    public function stock($date = '2024-06-05', array $shopIds = [1, 2, 3,4,5,6,7,9])
+    public function index()
 {
-    $query = Item::query();
+    $shops=Shop::whereIn('id',[1,25])->get();
+    $repDate = now()->format('Y-m-d');
+    //dd($date);
+    return view('report',['shops'=>$shops,'shopId'=>0,'repDate'=>$repDate,'data'=>[]]);
+    
+}
+public function reportbody(Request $request){
+    $data=$request->all();
+    //dd($data);
+    $shop_id=$data["shop"];
+    $rep_date=$data["repDate"];
+    if ($shop_id==0){
+        dd('all');
+    }else{
+        $rep_data= Item::select(
+            'items.*',
+            
+            'stocks.qty as stock_qty',
+            'stocks.total as stock_total',
+            'sells.qty as sell_qty',
+            'sells.total as sell_total',
+            'sells.cost as sell_cost ',
+            'sells.discount as sell_discount '
+        )->with('partner')->with('category')
+       // ->where('items.status',true)
+        ->leftJoin('stocks', function ($join) use ($rep_date, $shop_id) {
+            $join->on('stocks.item_id', '=', 'items.id')
+                 ->where('stocks.stock_date', $rep_date)
+                 ->where('stocks.shop_id', $shop_id);
+        })
+        ->leftJoin('sells', function ($join) use ($rep_date, $shop_id) {
+            $join->on('sells.item_id', '=', 'items.id')
+                 ->where('sells.sell_date', $rep_date)
+                 ->where('sells.shop_id', $shop_id);
+        })
+        ->orderBy('sell_qty', 'desc') 
+        ->paginate(50);
 
-    foreach ($shopIds as $shopId) {
-        $alias = 's' . $shopId;
-
-        $query->leftJoin("stocks as {$alias}", function ($join) use ($alias, $date, $shopId) {
-            $join->on('items.id', '=', "{$alias}.item_id")
-                 ->where("{$alias}.stock_date", '=', $date)
-                 ->where("{$alias}.shop_id", '=', $shopId);
-        });
+        //dd($rep_data);
     }
+    $shopIds=[1,25];
+    $shops=Shop::whereIn('id',[1,25])->get();
+    //$query = Item::query();
 
-    // базовые select поля
-    $select = ['items.*'];
+   
+   //dd($report);
 
-    // добавляем колонки остатков по складам
-    foreach ($shopIds as $shopId) {
-        $alias = 's' . $shopId;
-        $select[] = "{$alias}.qty as stock_qty_shop_{$shopId}";
-        $select[] = "{$alias}.total as stock_total_shop_{$shopId}";
-    }
 
-    $report = $query->select($select)->paginate(50);
 
-    dd($report);
+
+
+
+    return view('report',['shops'=>$shops,'shopId'=>$shop_id,'repDate'=>$rep_date,'data'=>$rep_data]);
 }
 
 
