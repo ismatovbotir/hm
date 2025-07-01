@@ -4,12 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        *{
+            font-size:12px;
+        }
+    </style>
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="container">
+    <div class="ccontainer-fluid">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">HM report</a>
@@ -57,12 +62,20 @@
                         <th scope="col">ShortName</th>
                         <th scope="col">Partner</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Stock_Qty</th>
-                        <th scope="col">Stock_Total</th>
-                        <th scope="col">Sell_Qty</th>
-                        <th scope="col">Sell_Total</th>
-                        <th scope="col">Sell_Cost</th>
-                        <th scope="col">Discount</th>
+                        <th scope="col">SD_Stock_Qty</th>
+                        <th scope="col">SD_Stock_Total</th>
+                        <th scope="col">SD_Sell_Qty</th>
+                        <th scope="col">SD_Sell_Total</th>
+                        <th scope="col">SD_Sell_Cost</th>
+                        <th scope="col">SD_Discount</th>
+                        @if($shopId==0)
+                        <th scope="col">PR_Stock_Qty</th>
+                        <th scope="col">PR_Stock_Total</th>
+                        <th scope="col">PR_Sell_Qty</th>
+                        <th scope="col">PR_Sell_Total</th>
+                        <th scope="col">PR_Sell_Cost</th>
+                        <th scope="col">PR_Discount</th>
+                        @endif
 
                     </tr>
                 </thead>
@@ -77,12 +90,20 @@
                         <td>{{$row->shoerName}}</td>
                         <td>{{$row->partner?$row->partner->name:''}}</td>
                         <td>{{$row->status==0?'Blocked':'Active'}}</td>
-                        <td>{{$row->stock_qty}}</td>
-                        <td>{{$row->stock_total}}</td>
-                        <td>{{$row->sell_qty}}</td>
-                        <td>{{$row->sell_total}}</td>
-                        <td>{{$row->sell_cost}}</td>
-                        <td>{{$row->stock_discount}}</td>
+                        <td>{{$row->stock1_qty}}</td>
+                        <td>{{$row->stock1_total}}</td>
+                        <td>{{$row->sell1_qty}}</td>
+                        <td>{{$row->sell1_total}}</td>
+                        <td>{{$row->sell1_cost}}</td>
+                        <td>{{$row->stock1_discount}}</td>
+                        @if($shopId==0)
+                        <td>{{$row->stock2_qty}}</td>
+                        <td>{{$row->stock2_total}}</td>
+                        <td>{{$row->sell2_qty}}</td>
+                        <td>{{$row->sell2_total}}</td>
+                        <td>{{$row->sell2_cost}}</td>
+                        <td>{{$row->stock2_discount}}</td>
+                        @endif
 
                     </tr>
                             @empty
