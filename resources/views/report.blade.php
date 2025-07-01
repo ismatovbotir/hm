@@ -17,7 +17,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form action="/report" class="d-flex" role="search" method="POST">
+                    <form action="/report" class="d-flex" role="search" method="GET">
 
 
 
@@ -40,7 +40,7 @@
 
                         <input class="form-control me-2" type="date" value="{{$repDate}}" name="repDate" />
                         <button class="btn btn-outline-success" type="submit">Report</button>
-                        @csrf
+                        
                     </form>
                 </div>
             </div>
@@ -90,6 +90,9 @@
                             @endforelse
                 </tbody>
             </table>
+            @if(count($data)>0)
+            {{$data->links()}}
+            @endif
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
