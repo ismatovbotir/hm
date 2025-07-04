@@ -127,7 +127,7 @@
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->shortName}}</td>
                                             <td>
-                                                @if($item->status==0)
+                                                @if($item->status!=0)
                                                 <span class="badge badge-dot badge-dot-xs badge-danger">block</span>
                                                 @else
                                                 <span class="badge badge-dot badge-dot-xs badge-success">active</span>
