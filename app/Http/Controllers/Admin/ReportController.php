@@ -12,6 +12,8 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
+        
+        return view('report.dashboard');
         $rep_date = $request->input('repDate', now()->format('Y-m-d'));
         $shop_id = (int) $request->input('shop', 0);
     
@@ -28,6 +30,7 @@ class ReportController extends Controller
                     'sells1.cost as sell1_cost',
                     'sells1.discount as sell1_discount',
                 ])
+                //->whereNot('partner_id',null)
                 ->leftJoin('stocks as stocks1', function ($join) use ($rep_date, $shop_id) {
                     $join->on('stocks1.item_id', '=', 'items.id')
                          ->where('stocks1.stock_date', $rep_date)
@@ -102,6 +105,16 @@ class ReportController extends Controller
             'data'    => $rep_data,
         ]);
     }
+    public function sell(){
+        return view('layouts.app');
 
+    }
+    public function stock(){
+        return view('report.item');
+    }
+
+    public function item(){
+        return view('report.item');
+    }
 
 }

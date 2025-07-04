@@ -25,5 +25,8 @@ Route::get('/stock',[StockController::class,'index']);
 Route::resource('/item',ItemController::class);
 Route::resource('/partner',PartnerController::class);
 
-Route::get('/report',[ReportController::class,'index']);
-Route::post('/report',[ReportController::class,'reportBody'])->name('report.body');
+Route::get('/report',[ReportController::class,'index'])->name('report.dashboard');
+Route::get('/report/item',[ReportController::class,'item'])->name('report.item');
+Route::get('/report/stock',[ReportController::class,'stock'])->name('report.stock');
+Route::get('/report/sell',[ReportController::class,'sell'])->name('report.sell');
+
